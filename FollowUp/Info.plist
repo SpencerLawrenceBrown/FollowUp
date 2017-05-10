@@ -39,7 +39,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Add Follow Up Events to the Calendar</string>
 	<key>NSRemindersUsageDescription</key>
-	<string>Let me work</string>
+	<string>Add Follow Up Reminders</string>
 </dict>
 </plist>

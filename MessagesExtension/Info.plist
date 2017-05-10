@@ -21,7 +21,9 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>NSRemindersUsageDescription</key>
-	<string>Will use reminders</string>
+	<string>Create Reminders</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Create Events</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionMainStoryboard</key>

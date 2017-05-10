@@ -317,16 +317,11 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDataSourc
     //Check if the user has given access to the calendar
     private func checkCalendarAccess(){
         
-        print("here")
-        
         let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
-        
-        print("here")
         
         switch status{
         case EKAuthorizationStatus.notDetermined:
             //On first time through
-            print("here")
             requestAccessToCalendar()
         case EKAuthorizationStatus.restricted, EKAuthorizationStatus.denied:
             print("Access Denied")
