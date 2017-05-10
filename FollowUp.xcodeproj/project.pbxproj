@@ -10,9 +10,12 @@
 		0F386E5C1EA2ABD000C84137 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F386E5B1EA2ABD000C84137 /* Assets.xcassets */; };
 		0F386E631EA2ABD000C84137 /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0F386E621EA2ABD000C84137 /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0F386E681EA2ABD000C84137 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F386E671EA2ABD000C84137 /* Messages.framework */; };
-		0F386E6B1EA2ABD000C84137 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F386E6A1EA2ABD000C84137 /* MessagesViewController.swift */; };
 		0F386E6E1EA2ABD000C84137 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F386E6C1EA2ABD000C84137 /* MainInterface.storyboard */; };
 		0F386E701EA2ABD000C84137 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F386E6F1EA2ABD000C84137 /* Assets.xcassets */; };
+		0F386E7E1EA2C3E300C84137 /* CompactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F386E7D1EA2C3E300C84137 /* CompactViewController.swift */; };
+		0F386E801EA2CA0B00C84137 /* ExpandedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F386E7F1EA2CA0B00C84137 /* ExpandedViewController.swift */; };
+		0F386E811EA2D84300C84137 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F386E6A1EA2ABD000C84137 /* MessagesViewController.swift */; };
+		0FBA70B31EC29EAD003A451D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBA70B21EC29EAD003A451D /* EventKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		0F386E6D1EA2ABD000C84137 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		0F386E6F1EA2ABD000C84137 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F386E711EA2ABD000C84137 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0F386E7D1EA2C3E300C84137 /* CompactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompactViewController.swift; sourceTree = "<group>"; };
+		0F386E7F1EA2CA0B00C84137 /* ExpandedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedViewController.swift; sourceTree = "<group>"; };
+		0FBA70B21EC29EAD003A451D /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FBA70B31EC29EAD003A451D /* EventKit.framework in Frameworks */,
 				0F386E681EA2ABD000C84137 /* Messages.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,6 +101,7 @@
 		0F386E661EA2ABD000C84137 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0FBA70B21EC29EAD003A451D /* EventKit.framework */,
 				0F386E671EA2ABD000C84137 /* Messages.framework */,
 			);
 			name = Frameworks;
@@ -103,6 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				0F386E6A1EA2ABD000C84137 /* MessagesViewController.swift */,
+				0F386E7D1EA2C3E300C84137 /* CompactViewController.swift */,
+				0F386E7F1EA2CA0B00C84137 /* ExpandedViewController.swift */,
 				0F386E6C1EA2ABD000C84137 /* MainInterface.storyboard */,
 				0F386E6F1EA2ABD000C84137 /* Assets.xcassets */,
 				0F386E711EA2ABD000C84137 /* Info.plist */,
@@ -159,10 +169,12 @@
 				TargetAttributes = {
 					0F386E571EA2ABD000C84137 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = FQ68ZG9M54;
 						ProvisioningStyle = Automatic;
 					};
 					0F386E611EA2ABD000C84137 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = FQ68ZG9M54;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -211,7 +223,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F386E6B1EA2ABD000C84137 /* MessagesViewController.swift in Sources */,
+				0F386E811EA2D84300C84137 /* MessagesViewController.swift in Sources */,
+				0F386E801EA2CA0B00C84137 /* ExpandedViewController.swift in Sources */,
+				0F386E7E1EA2C3E300C84137 /* CompactViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +346,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = FQ68ZG9M54;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tst.FollowUp.MessagesExtension;
@@ -345,6 +361,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = FQ68ZG9M54;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tst.FollowUp.MessagesExtension;
@@ -359,6 +377,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = FQ68ZG9M54;
 				INFOPLIST_FILE = FollowUp/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = tst.FollowUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -372,6 +391,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = FQ68ZG9M54;
 				INFOPLIST_FILE = FollowUp/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = tst.FollowUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -399,6 +419,7 @@
 				0F386E761EA2ABD000C84137 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0F386E781EA2ABD000C84137 /* Build configuration list for PBXNativeTarget "FollowUp" */ = {
 			isa = XCConfigurationList;
@@ -407,6 +428,7 @@
 				0F386E7A1EA2ABD000C84137 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

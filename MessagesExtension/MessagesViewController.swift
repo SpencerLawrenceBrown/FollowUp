@@ -6,20 +6,59 @@
 //  Copyright © 2017 Spencer Brown. All rights reserved.
 //
 
+import EventKit
 import UIKit
 import Messages
 
-class MessagesViewController: MSMessagesAppViewController {
+class MessagesViewController: MSMessagesAppViewController, UIPickerViewDataSource {
+    
+    //MARK: Properties
+    
+    enum AppState : Int {
+        case initialView
+        case detailView
+        case completionView
+    }
+    
+    struct PickerValue{
+        
+        var string: String = ""
+        var date : Date
+    }
+    
+    //List of picker keys
+    var pickerKeys: [String] = [String]()
+    
+    var pickerValues: [PickerValue] = [PickerValue]()
+    
+    var overallState : AppState = AppState.initialView
+    
+    var pickerIndex : Int = 0
+    
+    let eventStore = EKEventStore()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        //Listen for the keyboard
+        registerKeyboardListener()
+        
+        //Initialize Picker Date
+        setPickerKeys()
+        
+        //Get ccess
+        checkCalendarAccess()
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     // MARK: - Conversation Handling
     
@@ -28,6 +67,9 @@ class MessagesViewController: MSMessagesAppViewController {
         // This will happen when the extension is about to present UI.
         
         // Use this method to configure the extension and restore previously stored state.
+        
+        //Present the correct initial view
+        presentVC(for: conversation, with: overallState)
     }
     
     override func didResignActive(with conversation: MSConversation) {
@@ -59,6 +101,8 @@ class MessagesViewController: MSMessagesAppViewController {
     
     override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
         // Called before the extension transitions to a new presentation style.
+        
+        print("transitioning")
     
         // Use this method to prepare for the change in presentation style.
     }
@@ -68,5 +112,241 @@ class MessagesViewController: MSMessagesAppViewController {
     
         // Use this method to finalize any behaviors associated with the change in presentation style.
     }
+    
+    
+    //MARK: Picker Data Delegate functions
+    // The number of columns of data
+    func numberOfComponents(in pickerView: UIPickerView) -> Int{
+        return 1
+    }
+    
+    // The number of rows of datab
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerKeys.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView,
+                    titleForRow row: Int,
+                    forComponent component: Int) -> String?{
+        
+        return pickerKeys[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView,
+                    didSelectRow row: Int,
+                    inComponent component: Int){
+        
+        print(row)
+    }
+    
+    
+    //MARK: Private Functions
+    
+    //Determine which view to show
+    private func presentVC(for conversation: MSConversation, with appState: AppState){
+        
+        let controller: UIViewController
+        
+        switch appState {
+        case .initialView:
+            print("in initial view")
+            controller = instantiateCompactVC()
+            
+            //Change to compact view
+            requestPresentationStyle(.compact)
+            
+            break
+        case .detailView:
+            print("in detail view")
+            controller = instantiateExpandedVC()
+            
+            //Change to expanded view
+            requestPresentationStyle(.expanded)
+            
+            break
+        case .completionView:
+            print("in completion view")
+            controller = instantiateCompactVC()
+            
+            //Change to compact view
+            requestPresentationStyle(.compact)
+            
+            break
+        default:
+            fatalError("PresentVC App State Switch Called Default with value \(appState). This shouldnt be possible")
+        }
+        
+        //Embed the new controller
+        addChildViewController(controller)
+        
+        view.addSubview(controller.view)
+        controller.didMove(toParentViewController: self)
+        
+        //update overall state
+        overallState = appState
+        
+    }
+    
+    //Instantiate Compact controller
+    private func instantiateCompactVC() -> UIViewController{
+        
+        //Instantiate a compact view controller
+        
+        guard let compactVC = storyboard?.instantiateViewController(withIdentifier: CompactViewController.storyboardIdentifier) as? CompactViewController else {
+            fatalError("Can't instantiate CompactViewController")
+        }
+        
+        
+        return compactVC
+        
+    }
+    
+    //Instantiate Expanded
+    private func instantiateExpandedVC() -> UIViewController{
+        
+        //Instantiate an expanded view controller
+        
+        guard let expandedVC = storyboard?.instantiateViewController(withIdentifier: ExpandedViewController.storyboardIdentifier) as? ExpandedViewController else{
+            fatalError("Can't instantiate ExpandedViewController")
+        }
+        
+        return expandedVC
+        
+    }
+    
+    //Listen for keyboard calls
+    private func registerKeyboardListener(){
+        
+        //Keyboard will show
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: .UIKeyboardWillShow,
+            object: nil
+        );
+        
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification){
+        print("keyboard will show")
+//        changeToExtendedView()
+    }
+    
+    
+    //Function that the children views call to move to the next view
+    func changeState(_ currentState: MessagesViewController.AppState, shouldProgress: Bool){
+        
+        //Get the raw value
+        var rawValue: Int = currentState.rawValue
+        
+        //Increment in the correct direction
+        rawValue = shouldProgress ? rawValue+1 : rawValue-1
+        if (rawValue < 0){ rawValue = 0 }
+        
+        let newState = AppState(rawValue: rawValue)
+        
+        //Get the correct view
+        presentVC(for: activeConversation!, with: newState!)
+        
+        
+    }
+    
+    //Set the current value for the reminder picker
+    func setPickerValue(row: Int){
+        
+        pickerIndex = row
+        
+    }
+    
+    //Set Picker Keys
+    private func setPickerKeys(){
+        
+        //Eventually, populate this list with a set of times
+        pickerKeys = ["In 5 minutes", "In 10 minutes", "In an hour", "Tomorrow", "In 3 Days"]
+        
+        //Determine the time values
+        let now = Date()
+        let userCalendar = Calendar.current
 
+        //Build out the date string
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        
+        
+        //Soon, later, tomorrow, eventually
+        
+        //near -- in 10 minutes
+        var date = userCalendar.date(byAdding: Calendar.Component.minute, value: 5, to: now)!
+        var string = "In 5 minutes (" + dateFormatter.string(from: date) + ")"
+        let near = PickerValue(string: string, date: date)
+        
+        //Soon -- in 10 minutes
+        date = userCalendar.date(byAdding: Calendar.Component.minute, value: 10, to: now)!
+        string = "In 10 minutes (" + dateFormatter.string(from: date) + ")"
+        let soon = PickerValue(string: string, date: date)
+        
+        //Later -- in 90 minutes
+        date = userCalendar.date(byAdding: Calendar.Component.minute, value: 60, to: now)!
+        string = "In an hour (" + dateFormatter.string(from: date) + ")"
+        let later = PickerValue(string: string, date: date)
+        
+        dateFormatter.dateStyle = .short
+        
+        //Tomorrow -- the next day at 2pm
+        date = userCalendar.date(byAdding: Calendar.Component.day, value: 1, to: now)!
+        date = userCalendar.date(bySetting: Calendar.Component.hour, value: 14, of: date)!
+        string = "Tomorrow at 2pm (" + dateFormatter.string(from: date) + ")"
+        let tomorrow = PickerValue(string: string, date: date)
+        
+        //Eventually -- in 3 days at 2pm
+        date = userCalendar.date(byAdding: Calendar.Component.day, value: 3, to: now)!
+        date = userCalendar.date(bySetting: Calendar.Component.hour, value: 14, of: date)!
+        string = "In 3 days at 2pm (" + dateFormatter.string(from: date) + ")"
+        let eventually = PickerValue(string: string, date: date)
+        
+        pickerValues.append(near)
+        pickerValues.append(soon)
+        pickerValues.append(later)
+        pickerValues.append(tomorrow)
+        pickerValues.append(eventually)
+        
+
+    }
+    
+    //Check if the user has given access to the calendar
+    private func checkCalendarAccess(){
+        
+        print("here")
+        
+        let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
+        
+        print("here")
+        
+        switch status{
+        case EKAuthorizationStatus.notDetermined:
+            //On first time through
+            print("here")
+            requestAccessToCalendar()
+        case EKAuthorizationStatus.restricted, EKAuthorizationStatus.denied:
+            print("Access Denied")
+        default:
+            print("Access Available")
+        }
+        
+    }
+    
+    //request access to calendar
+    private func requestAccessToCalendar(){
+        
+        eventStore.requestAccess(to: EKEntityType.reminder, completion: {
+            (accessGranted: Bool, error: Error?) in
+            
+            //Eventually this will print access granted
+            if !accessGranted{
+                print("Access to store not granted")
+            }
+        }) //completion
+    }//requestAccess...
+    
 }
