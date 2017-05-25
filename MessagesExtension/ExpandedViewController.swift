@@ -29,6 +29,8 @@ class ExpandedViewController: UIViewController, UIPickerViewDelegate, UITextFiel
     
     var pickerIndex: Int = 0
     
+    var eventTitle: String = ""
+    
     //Identifier
     static let storyboardIdentifier = "ExpandedVC"
 
@@ -90,6 +92,7 @@ class ExpandedViewController: UIViewController, UIPickerViewDelegate, UITextFiel
                     inComponent component: Int){
     
         setDateString(index: row)
+        self.pickerIndex = row
         
     }
 
@@ -108,19 +111,43 @@ class ExpandedViewController: UIViewController, UIPickerViewDelegate, UITextFiel
     @IBAction func createButtonPressed(_ sender: UIButton) {
         
         checkCalendarAccess()
-
         
         //Create calendar event
         let event = EKEvent(eventStore: self.eventStore)
         
-        event.title = reminderContentLabel.text!
-        event.calendar = eventStore.defaultCalendarForNewEvents
+        event.title = eventTitle
+        let cal = eventStore.defaultCalendarForNewEvents
+        
+        print(cal.title)
+        
+        if cal == nil{
+            print("calendar is null")
+            event.calendar = EKCalendar(for: .event, eventStore: self.eventStore)
+
+        } else {
+            print("calendar is not null")
+            event.calendar = cal
+            print(event.calendar.title)
+        }
+        
+        
+        event.startDate = self.pickerValues[self.pickerIndex].date
+        event.endDate   = Calendar.current.date(byAdding: .minute, value: 10, to: event.startDate)!
         
         do{
+            
             try eventStore.save(event, span: EKSpan.thisEvent)
+            sender.setTitle("Added Successfully!", for: .disabled)
+            sender.isEnabled = false
+            progressToNextView()
+            
         } catch let error {
+            sender.setTitle("Oh snap! Something went wrong. Bummer. Restart the app and try again.", for: .disabled)
+            sender.isEnabled = false
             print("Calendar failed with error \(error.localizedDescription)")
+            
         }
+    
         
     }
     
@@ -129,12 +156,13 @@ class ExpandedViewController: UIViewController, UIPickerViewDelegate, UITextFiel
     //Value of the text field changed
     @IBAction func textFieldValueChanged(_ sender: UITextField) {
         
-        let message = "\"Follow up with " + sender.text! + "\""
-        reminderContentLabel.text = message
+        let message = "Follow up with " + sender.text!
+        eventTitle = message
+        reminderContentLabel.text = "\"" + message + "\""
     
     }
     
-    //Get) rid of the keyboard when editing done
+    //Get rid of the keyboard when editing done
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
@@ -151,16 +179,11 @@ class ExpandedViewController: UIViewController, UIPickerViewDelegate, UITextFiel
     //Check if the user has given access to the calendar
     private func checkCalendarAccess(){
         
-        print("here")
-        
         let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
-        
-        print("here")
         
         switch status{
         case EKAuthorizationStatus.notDetermined:
             //On first time through
-            print("here")
             requestAccessToCalendar()
         case EKAuthorizationStatus.restricted, EKAuthorizationStatus.denied:
             print("Access Denied")
@@ -183,4 +206,17 @@ class ExpandedViewController: UIViewController, UIPickerViewDelegate, UITextFiel
         }) //completion
     }//requestAccess...
 
+    
+    //Expand the view to an extended view
+    private func progressToNextView(){
+        
+        //Get the parent controller so that I can manage the views
+        guard let messageController = self.parent as? MessagesViewController else {
+            fatalError("can't open")
+        }
+        
+        messageController.changeState(viewState, shouldProgress: true)
+        
+        
+    }
 }

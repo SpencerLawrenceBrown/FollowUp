@@ -6,7 +6,6 @@
 //  Copyright © 2017 Spencer Brown. All rights reserved.
 //
 
-import EventKit
 import UIKit
 import Messages
 
@@ -18,6 +17,8 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDataSourc
         case initialView
         case detailView
         case completionView
+        
+        static var count: Int { return AppState.completionView.rawValue + 1}
     }
     
     struct PickerValue{
@@ -35,8 +36,6 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDataSourc
     
     var pickerIndex : Int = 0
     
-    let eventStore = EKEventStore()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,9 +46,7 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDataSourc
         
         //Initialize Picker Date
         setPickerKeys()
-        
-        //Get ccess
-        checkCalendarAccess()
+
         
     }
     
@@ -109,7 +106,8 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDataSourc
     
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
         // Called after the extension transitions to a new presentation style.
-    
+        print("transitioned")
+        
         // Use this method to finalize any behaviors associated with the change in presentation style.
     }
     
@@ -150,26 +148,32 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDataSourc
         switch appState {
         case .initialView:
             print("in initial view")
-            controller = instantiateCompactVC()
-            
             //Change to compact view
             requestPresentationStyle(.compact)
+            
+            controller = instantiateVC(myType: CompactViewController.self, storyboardID: CompactViewController.storyboardIdentifier)
+            
+
             
             break
         case .detailView:
             print("in detail view")
-            controller = instantiateExpandedVC()
             
             //Change to expanded view
             requestPresentationStyle(.expanded)
             
+            controller = instantiateVC(myType: ExpandedViewController.self, storyboardID: ExpandedViewController.storyboardIdentifier)
+            
+    
+            
             break
         case .completionView:
             print("in completion view")
-            controller = instantiateCompactVC()
             
             //Change to compact view
             requestPresentationStyle(.compact)
+            
+            controller = instantiateVC(myType: CompletionViewController.self, storyboardID: CompletionViewController.storyboardIdentifier)
             
             break
         default:
@@ -184,33 +188,22 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDataSourc
         
         //update overall state
         overallState = appState
+        self.childViewControllers.first?.view?.setNeedsLayout()
+
         
     }
     
     //Instantiate Compact controller
-    private func instantiateCompactVC() -> UIViewController{
+    private func instantiateVC<T>(myType: T.Type, storyboardID: String) -> UIViewController{
         
         //Instantiate a compact view controller
         
-        guard let compactVC = storyboard?.instantiateViewController(withIdentifier: CompactViewController.storyboardIdentifier) as? CompactViewController else {
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: storyboardID) as? T else {
             fatalError("Can't instantiate CompactViewController")
         }
         
         
-        return compactVC
-        
-    }
-    
-    //Instantiate Expanded
-    private func instantiateExpandedVC() -> UIViewController{
-        
-        //Instantiate an expanded view controller
-        
-        guard let expandedVC = storyboard?.instantiateViewController(withIdentifier: ExpandedViewController.storyboardIdentifier) as? ExpandedViewController else{
-            fatalError("Can't instantiate ExpandedViewController")
-        }
-        
-        return expandedVC
+        return vc as! UIViewController
         
     }
     
@@ -241,7 +234,7 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDataSourc
         
         //Increment in the correct direction
         rawValue = shouldProgress ? rawValue+1 : rawValue-1
-        if (rawValue < 0){ rawValue = 0 }
+        if (rawValue < 0 || rawValue == AppState.count ){ rawValue = 0 }
         
         let newState = AppState(rawValue: rawValue)
         
@@ -311,42 +304,6 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDataSourc
         pickerValues.append(tomorrow)
         pickerValues.append(eventually)
         
+    }
 
-    }
-    
-    //Check if the user has given access to the calendar
-    private func checkCalendarAccess(){
-        
-        print("here")
-        
-        let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
-        
-        print("here")
-        
-        switch status{
-        case EKAuthorizationStatus.notDetermined:
-            //On first time through
-            print("here")
-            requestAccessToCalendar()
-        case EKAuthorizationStatus.restricted, EKAuthorizationStatus.denied:
-            print("Access Denied")
-        default:
-            print("Access Available")
-        }
-        
-    }
-    
-    //request access to calendar
-    private func requestAccessToCalendar(){
-        
-        eventStore.requestAccess(to: EKEntityType.reminder, completion: {
-            (accessGranted: Bool, error: Error?) in
-            
-            //Eventually this will print access granted
-            if !accessGranted{
-                print("Access to store not granted")
-            }
-        }) //completion
-    }//requestAccess...
-    
 }

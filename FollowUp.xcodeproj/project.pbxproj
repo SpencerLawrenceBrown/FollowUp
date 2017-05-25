@@ -15,6 +15,7 @@
 		0F386E7E1EA2C3E300C84137 /* CompactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F386E7D1EA2C3E300C84137 /* CompactViewController.swift */; };
 		0F386E801EA2CA0B00C84137 /* ExpandedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F386E7F1EA2CA0B00C84137 /* ExpandedViewController.swift */; };
 		0F386E811EA2D84300C84137 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F386E6A1EA2ABD000C84137 /* MessagesViewController.swift */; };
+		0F5AC9991ECFF200007130F2 /* CompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5AC9981ECFF200007130F2 /* CompletionViewController.swift */; };
 		0FBA70B31EC29EAD003A451D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBA70B21EC29EAD003A451D /* EventKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		0F386E711EA2ABD000C84137 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F386E7D1EA2C3E300C84137 /* CompactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompactViewController.swift; sourceTree = "<group>"; };
 		0F386E7F1EA2CA0B00C84137 /* ExpandedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedViewController.swift; sourceTree = "<group>"; };
+		0F5AC9981ECFF200007130F2 /* CompletionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletionViewController.swift; sourceTree = "<group>"; };
 		0FBA70B21EC29EAD003A451D /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -113,6 +115,7 @@
 				0F386E6A1EA2ABD000C84137 /* MessagesViewController.swift */,
 				0F386E7D1EA2C3E300C84137 /* CompactViewController.swift */,
 				0F386E7F1EA2CA0B00C84137 /* ExpandedViewController.swift */,
+				0F5AC9981ECFF200007130F2 /* CompletionViewController.swift */,
 				0F386E6C1EA2ABD000C84137 /* MainInterface.storyboard */,
 				0F386E6F1EA2ABD000C84137 /* Assets.xcassets */,
 				0F386E711EA2ABD000C84137 /* Info.plist */,
@@ -225,6 +228,7 @@
 			files = (
 				0F386E811EA2D84300C84137 /* MessagesViewController.swift in Sources */,
 				0F386E801EA2CA0B00C84137 /* ExpandedViewController.swift in Sources */,
+				0F5AC9991ECFF200007130F2 /* CompletionViewController.swift in Sources */,
 				0F386E7E1EA2C3E300C84137 /* CompactViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
