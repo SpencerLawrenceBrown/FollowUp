@@ -16,6 +16,7 @@
 		0F386E801EA2CA0B00C84137 /* ExpandedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F386E7F1EA2CA0B00C84137 /* ExpandedViewController.swift */; };
 		0F386E811EA2D84300C84137 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F386E6A1EA2ABD000C84137 /* MessagesViewController.swift */; };
 		0F5AC9991ECFF200007130F2 /* CompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5AC9981ECFF200007130F2 /* CompletionViewController.swift */; };
+		0F79406D1ED67D3D00004AE7 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F79406C1ED67D3D00004AE7 /* EventViewController.swift */; };
 		0FBA70B31EC29EAD003A451D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBA70B21EC29EAD003A451D /* EventKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		0F386E7D1EA2C3E300C84137 /* CompactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompactViewController.swift; sourceTree = "<group>"; };
 		0F386E7F1EA2CA0B00C84137 /* ExpandedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedViewController.swift; sourceTree = "<group>"; };
 		0F5AC9981ECFF200007130F2 /* CompletionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletionViewController.swift; sourceTree = "<group>"; };
+		0F79406C1ED67D3D00004AE7 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		0FBA70B21EC29EAD003A451D /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				0F386E6A1EA2ABD000C84137 /* MessagesViewController.swift */,
+				0F79406C1ED67D3D00004AE7 /* EventViewController.swift */,
 				0F386E7D1EA2C3E300C84137 /* CompactViewController.swift */,
 				0F386E7F1EA2CA0B00C84137 /* ExpandedViewController.swift */,
 				0F5AC9981ECFF200007130F2 /* CompletionViewController.swift */,
@@ -226,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F79406D1ED67D3D00004AE7 /* EventViewController.swift in Sources */,
 				0F386E811EA2D84300C84137 /* MessagesViewController.swift in Sources */,
 				0F386E801EA2CA0B00C84137 /* ExpandedViewController.swift in Sources */,
 				0F5AC9991ECFF200007130F2 /* CompletionViewController.swift in Sources */,
@@ -353,6 +357,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = FQ68ZG9M54;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tst.FollowUp.MessagesExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -368,6 +373,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = FQ68ZG9M54;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tst.FollowUp.MessagesExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -383,6 +389,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = FQ68ZG9M54;
 				INFOPLIST_FILE = FollowUp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tst.FollowUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -397,6 +404,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = FQ68ZG9M54;
 				INFOPLIST_FILE = FollowUp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tst.FollowUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;

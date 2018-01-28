@@ -55,8 +55,6 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDataSourc
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
     // MARK: - Conversation Handling
     
     override func willBecomeActive(with conversation: MSConversation) {
@@ -140,45 +138,51 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDataSourc
     
     //MARK: Private Functions
     
+    //Change State
+    
+    //Determine which view to show
+//    private func changeState(for conversation: MSConversation, with appState: AppState){
+//        
+//        
+//        switch appState {
+//        case .initialView:
+//            
+//            print("in initial view")
+//            //Change to compact view
+//            requestPresentationStyle(.compact)
+//            
+//            break
+//        case .detailView:
+//            print("in detail view")
+//            
+//            //Change to expanded view
+//            requestPresentationStyle(.expanded)
+//            
+//            break
+//        case .completionView:
+//            
+//            print("in completion view")
+//            
+//            //change to compact view
+//            requestPresentationStyle(.compact)
+//            
+//        default:
+//            fatalError("PresentVC App State Switch Called Default with value \(appState). This shouldnt be possible")
+//        }
+//        
+//        //update overall state
+//        overallState = appState
+//        
+//    }
+
+    
     //Determine which view to show
     private func presentVC(for conversation: MSConversation, with appState: AppState){
-        
+
         let controller: UIViewController
         
-        switch appState {
-        case .initialView:
-            print("in initial view")
-            //Change to compact view
-            requestPresentationStyle(.compact)
-            
-            controller = instantiateVC(myType: CompactViewController.self, storyboardID: CompactViewController.storyboardIdentifier)
-            
-
-            
-            break
-        case .detailView:
-            print("in detail view")
-            
-            //Change to expanded view
-            requestPresentationStyle(.expanded)
-            
-            controller = instantiateVC(myType: ExpandedViewController.self, storyboardID: ExpandedViewController.storyboardIdentifier)
-            
-    
-            
-            break
-        case .completionView:
-            print("in completion view")
-            
-            //Change to compact view
-            requestPresentationStyle(.compact)
-            
-            controller = instantiateVC(myType: CompletionViewController.self, storyboardID: CompletionViewController.storyboardIdentifier)
-            
-            break
-        default:
-            fatalError("PresentVC App State Switch Called Default with value \(appState). This shouldnt be possible")
-        }
+        //Only one view controller now
+        controller = instantiateVC(myType: EventViewController.self, storyboardID: EventViewController.storyboardIdentifier)
         
         //Embed the new controller
         addChildViewController(controller)
@@ -186,25 +190,20 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDataSourc
         view.addSubview(controller.view)
         controller.didMove(toParentViewController: self)
         
-        //update overall state
-        overallState = appState
-        self.childViewControllers.first?.view?.setNeedsLayout()
-
-        
     }
     
     //Instantiate Compact controller
     private func instantiateVC<T>(myType: T.Type, storyboardID: String) -> UIViewController{
-        
+
         //Instantiate a compact view controller
-        
+
         guard let vc = storyboard?.instantiateViewController(withIdentifier: storyboardID) as? T else {
-            fatalError("Can't instantiate CompactViewController")
+            fatalError("Can't instantiate controller")
         }
-        
-        
+
+
         return vc as! UIViewController
-        
+
     }
     
     //Listen for keyboard calls
@@ -227,7 +226,7 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDataSourc
     
     
     //Function that the children views call to move to the next view
-    func changeState(_ currentState: MessagesViewController.AppState, shouldProgress: Bool){
+    func changeState(_ currentState: MessagesViewController.AppState, shouldProgress: Bool) -> AppState {
         
         //Get the raw value
         var rawValue: Int = currentState.rawValue
@@ -238,8 +237,12 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDataSourc
         
         let newState = AppState(rawValue: rawValue)
         
-        //Get the correct view
-        presentVC(for: activeConversation!, with: newState!)
+        //Get the correct view -- currently only one view
+        //presentVC(for: activeConversation!, with: newState!)
+        
+        //Get the correct state
+        
+        return newState!
         
         
     }

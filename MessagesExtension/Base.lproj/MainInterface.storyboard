@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,54 +27,10 @@
             </objects>
             <point key="canvasLocation" x="115" y="110"/>
         </scene>
-        <!--Compact View Controller-->
-        <scene sceneID="dZR-Iy-rJJ">
-            <objects>
-                <viewController storyboardIdentifier="CompactVC" id="Aan-lg-kah" customClass="CompactViewController" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="NAV-Fg-lI1"/>
-                        <viewControllerLayoutGuide type="bottom" id="R2i-oa-yoQ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ekt-jp-thC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2mJ-La-9Mf">
-                                <rect key="frame" x="27.5" y="273.5" width="320" height="120.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remind me to follow up in:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gR-BI-8OB">
-                                        <rect key="frame" x="59.5" y="0.0" width="201.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ocz-7Q-7xp">
-                                        <rect key="frame" x="0.0" y="20.5" width="320" height="100"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="49x-nC-D7L"/>
-                                        </constraints>
-                                    </pickerView>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="2mJ-La-9Mf" firstAttribute="centerY" secondItem="Ekt-jp-thC" secondAttribute="centerY" id="iZ5-tu-pD7"/>
-                            <constraint firstItem="2mJ-La-9Mf" firstAttribute="centerX" secondItem="Ekt-jp-thC" secondAttribute="centerX" id="zJw-6P-xgh"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="picker" destination="Ocz-7Q-7xp" id="agn-l8-515"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XvX-FP-4x0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="756" y="109"/>
-        </scene>
-        <!--Expanded View Controller-->
+        <!--Event View Controller-->
         <scene sceneID="ny9-f9-mj5">
             <objects>
-                <viewController storyboardIdentifier="ExpandedVC" id="Ec9-KL-Uci" customClass="ExpandedViewController" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EventVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ec9-KL-Uci" customClass="EventViewController" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VZo-oH-vzF"/>
                         <viewControllerLayoutGuide type="bottom" id="HDG-Od-HvV"/>
@@ -83,8 +39,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="B9e-Qf-C3R">
-                                <rect key="frame" x="27.5" y="120" width="320" height="237.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="B9e-Qf-C3R" userLabel="Details">
+                                <rect key="frame" x="27.5" y="120" width="320" height="229.5"/>
                                 <subviews>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQv-18-cZL">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
@@ -93,7 +49,7 @@
                                         </constraints>
                                     </pickerView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RIg-JU-40f">
-                                        <rect key="frame" x="0.0" y="100" width="320" height="137.5"/>
+                                        <rect key="frame" x="0.0" y="100" width="320" height="129.5"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Name &amp; Details" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CfR-9S-Ulz">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
@@ -149,11 +105,19 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jpg-RD-7vy">
-                                                <rect key="frame" x="103" y="107.5" width="114" height="30"/>
-                                                <state key="normal" title="Add To Calendar"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jpg-RD-7vy">
+                                                <rect key="frame" x="110" y="107.5" width="100" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="Zeo-G1-bDC"/>
+                                                </constraints>
+                                                <state key="normal" title="Edit" image="edit" backgroundImage="Image-1"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="createButtonPressed:" destination="Ec9-KL-Uci" eventType="touchUpInside" id="HE9-nj-luC"/>
+                                                    <action selector="createButtonPressed:" destination="Ec9-KL-Uci" eventType="touchUpInside" id="3Xc-hV-x9t"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -170,66 +134,77 @@
                                     <constraint firstItem="RIg-JU-40f" firstAttribute="leading" secondItem="B9e-Qf-C3R" secondAttribute="leading" id="fAD-Yq-Tmb"/>
                                 </constraints>
                             </stackView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="B9e-Qf-C3R" firstAttribute="top" secondItem="VZo-oH-vzF" secondAttribute="bottom" constant="100" id="JmU-bu-kXn"/>
-                            <constraint firstItem="B9e-Qf-C3R" firstAttribute="centerX" secondItem="CbA-5Y-E7Y" secondAttribute="centerX" id="RNK-Im-Q8r"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="createReminder" destination="jpg-RD-7vy" id="gvT-M4-271"/>
-                        <outlet property="picker" destination="qQv-18-cZL" id="zZM-6N-v52"/>
-                        <outlet property="reminderContentLabel" destination="BGk-Be-ipA" id="1l3-4N-bRs"/>
-                        <outlet property="reminderTextField" destination="CfR-9S-Ulz" id="BAj-Md-ggB"/>
-                        <outlet property="reminderTimeLabel" destination="gzb-b4-sgA" id="1j1-MZ-dJ8"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2AR-za-1gY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1393" y="112"/>
-        </scene>
-        <!--Completion View Controller-->
-        <scene sceneID="ntY-Dk-38v">
-            <objects>
-                <viewController storyboardIdentifier="CompletionVC" id="ogT-Cg-psc" customClass="CompletionViewController" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="qhe-nE-jwk"/>
-                        <viewControllerLayoutGuide type="bottom" id="60y-8W-Evy"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="RLJ-ka-joe">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hl9-rn-66h">
-                                <rect key="frame" x="100" y="298" width="176" height="71"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ibP-Qd-75k" userLabel="Completion">
+                                <rect key="frame" x="0.0" y="-3382" width="0.0" height="7431"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Follow Up  Has Been Set!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YVa-0c-gP1">
-                                        <rect key="frame" x="28.5" y="0.0" width="119" height="41"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Follow Up  Has Been Set!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QfS-Br-Dcl">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="7401"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.31980371644961175" green="0.81666813314263587" blue="0.29300320861681423" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" red="0.31980371639999999" green="0.81666813309999997" blue="0.29300320860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75P-jI-6Rr">
-                                        <rect key="frame" x="0.0" y="41" width="176" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doO-vH-Oth">
+                                        <rect key="frame" x="99.5" y="7401" width="176" height="30"/>
                                         <state key="normal" title="Create Another Follow Up"/>
-                                        <connections>
-                                            <action selector="returnToFirstView:" destination="ogT-Cg-psc" eventType="touchUpInside" id="8qU-Qc-28N"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="hl9-rn-66h" firstAttribute="centerY" secondItem="RLJ-ka-joe" secondAttribute="centerY" id="tuL-0Q-y5V"/>
-                            <constraint firstItem="hl9-rn-66h" firstAttribute="centerX" secondItem="RLJ-ka-joe" secondAttribute="centerX" id="yBG-fV-ZFz"/>
+                            <constraint firstItem="ibP-Qd-75k" firstAttribute="centerX" secondItem="CbA-5Y-E7Y" secondAttribute="centerX" id="LnY-dg-6oO"/>
+                            <constraint firstItem="B9e-Qf-C3R" firstAttribute="centerX" secondItem="CbA-5Y-E7Y" secondAttribute="centerX" id="RNK-Im-Q8r"/>
+                            <constraint firstItem="B9e-Qf-C3R" firstAttribute="top" secondItem="VZo-oH-vzF" secondAttribute="bottom" constant="100" id="pvZ-He-pnQ"/>
+                            <constraint firstItem="ibP-Qd-75k" firstAttribute="centerY" secondItem="CbA-5Y-E7Y" secondAttribute="centerY" id="xhc-d1-yIV"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="completionStack" destination="ibP-Qd-75k" id="RcS-9x-cYc"/>
+                        <outlet property="confirmationLabel" destination="QfS-Br-Dcl" id="HFg-e6-I7g"/>
+                        <outlet property="createReminder" destination="jpg-RD-7vy" id="ZAl-L0-Ysw"/>
+                        <outlet property="detailsStack" destination="B9e-Qf-C3R" id="YSj-Vo-m7l"/>
+                        <outlet property="picker" destination="qQv-18-cZL" id="MoB-ll-ISH"/>
+                        <outlet property="reminderContentLabel" destination="BGk-Be-ipA" id="xAs-Rg-0i3"/>
+                        <outlet property="reminderTextField" destination="CfR-9S-Ulz" id="aAp-Os-Vh8"/>
+                        <outlet property="reminderTimeLabel" destination="gzb-b4-sgA" id="Hwb-ao-Lg3"/>
+                        <outlet property="restartButton" destination="doO-vH-Oth" id="ahP-fl-v7g"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xm9-2Z-JRL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2AR-za-1gY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2044" y="111.99400299850076"/>
+            <point key="canvasLocation" x="794" y="112"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="7Sc-or-0KM">
+            <objects>
+                <tableViewController id="XWy-lc-1qg" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="B2M-r5-HAh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="FZE-uf-nKK">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FZE-uf-nKK" id="lIA-X0-RtN">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="XWy-lc-1qg" id="MAW-KE-nEO"/>
+                            <outlet property="delegate" destination="XWy-lc-1qg" id="COe-Xn-ICj"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="09p-L6-eem" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1852" y="126"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Image-1" width="64" height="15"/>
+        <image name="edit" width="20" height="20"/>
+    </resources>
 </document>
